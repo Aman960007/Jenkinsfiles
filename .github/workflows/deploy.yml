@@ -1,3 +1,11 @@
+name: Deploy using OIDC
+
+on:
+  push:
+    branches:
+      - main    # Run when someone pushes to main branch
+  workflow_dispatch:   # Optional: allows you to manually trigger it from GitHub UI
+
 permissions:
   id-token: write     # Important: allow workflow to get an OIDC token
   contents: read      # Standard repo access
@@ -16,4 +24,4 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy Application
-        run: aws s3 ls  # Example AWS CLI command
+        run: aws s3 ls
