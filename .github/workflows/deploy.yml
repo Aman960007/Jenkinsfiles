@@ -1,0 +1,19 @@
+permissions:
+  id-token: write     # Important: allow workflow to get an OIDC token
+  contents: read      # Standard repo access
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::302263059800:role/githubactionscheck
+          aws-region: us-east-1
+
+      - name: Deploy Application
+        run: aws s3 ls  # Example AWS CLI command
